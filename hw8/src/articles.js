@@ -61,7 +61,7 @@ const getArticles = (req, res) => {
         Profile.findOne({username: req.username}).exec(function(err, profile){
             var followers = profile.following
             followers.push(req.username)
-            var promise = Article.find({ 'author' : { $in: followers }}).exec()
+            var promise = Article.find({ 'author' : { $in: followers }}).sort({date: -1}).limit(10).exec()
             promise.then(function(allArticles){
                 res.send({articles: allArticles})
             })

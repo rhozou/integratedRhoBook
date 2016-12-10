@@ -1,7 +1,7 @@
 import Promise from 'bluebird'
 import fetch from 'isomorphic-fetch'
-//export const apiUrl = 'https://webdev-dummy.herokuapp.com'
-export const apiUrl = 'https://fast-ridge-31816.herokuapp.com'
+//export const apiUrl = 'https://fast-ridge-31816.herokuapp.com'
+export const apiUrl = 'http://127.0.0.1:3000'
 const Action = {
 
      ADD_ARTICLE: 'ADD_ARTICLE'
