@@ -7,10 +7,10 @@ export function fetchArticles() {
             dispatch({ type:Action.UPDATE_ARTICLES, articles: response.articles})
 
             const articleAvatars = getState().articles.avatars
-            const authors = new Set(response.articles.reduce((o, article) => {
-                article.comments.map((c) => c.author).forEach((author) => o.push(author))
-                return o
-            }, []).filter((author) => !articleAvatars[author]))
+            const authors = new Set()
+            response.articles.forEach((art) => {
+                authors.add(art.author)
+            })
             if (authors.size > 0) {
                 resource('GET', `avatars/${[...authors].join(',')}`)
                 .then((response) => {

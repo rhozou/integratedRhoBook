@@ -3,9 +3,13 @@ var Article = require('./model.js').Article
 var Comment = require('./model.js').Comment
 var Profile = require('./model.js').Profile
 const md5 = require('md5')
+let multer = require('multer')
+let upload = multer()
+const uploadImage = require('./uploadCloudinary')
 
 const addArticle = (req, res) => {
-     var newArticle = new Article({ author: req.username, img: "", date: new Date(), text: req.body.text, comments: []})
+     var imgurl = (req.fileurl) ? req.fileurl : ""
+     var newArticle = new Article({ author: req.username, img: imgurl, date: new Date(), text: req.body.text, comments: []})
      newArticle.save(function(err, art){
          if(err) return console.log(err)
          res.send({articles: [art]})
@@ -70,7 +74,7 @@ const getArticles = (req, res) => {
 }
 
 module.exports = app => {
-     app.post('/article', addArticle)
+     app.post('/article', uploadImage('avatar'), addArticle)
      app.get('/articles/:id*?', getArticles)
      app.put('/articles/:id', updateArticle)
 }

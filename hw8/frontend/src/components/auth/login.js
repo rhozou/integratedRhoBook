@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import { apiUrl } from '../../actions'
 import { localLogin } from './authActions'
 
 const Login = ({dispatch}) => {
@@ -19,6 +19,7 @@ const Login = ({dispatch}) => {
             </div>
             <input className="btn btn-primary" id="loginBtn" type="button" value="Login!"
              onClick={() => { dispatch(localLogin(username.value, password.value)) }}/>
+             <a href={`${apiUrl}/auth/facebook`} className="btn btn-primary">Log in with Facebook</a>
         </form>
     )
 }

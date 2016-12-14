@@ -11,7 +11,7 @@ class PostArticle extends Component {
         return (
             <form id="articleForm" onSubmit={(e) => {
                 e.preventDefault()
-                this.props.uploadTextOnlyArticle(this.message.value)
+                this.props.uploadArticle(this.message.value, this.file)
                 this.message.value = ""
             }}>
                 <div className="btn-group-vertical">
@@ -34,5 +34,5 @@ class PostArticle extends Component {
 }
 
 export default connect(null, (dispatch) => ({
-    uploadTextOnlyArticle: (text) => dispatch(uploadTextOnlyArticle(text))
+    uploadArticle: (text, file) => dispatch(uploadArticle(text, file))
 }))(PostArticle)

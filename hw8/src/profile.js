@@ -65,16 +65,14 @@ const getAvatars = (req, res) => {
     })
 }
 
-const putAvatars = (req, res) => {
-    res.send({username: req.username, avatar: ""})
-}
 
 const getDOB = (req, res) => {
     res.send({username: Profile.username, dob: 1479606767530})
 }
 
 const uploadAvatar = (req, res) => {
-    Profile.update({username: req.username }, { $set: { avatar: req.fileurl }})
+    Profile.update({username: req.username }, { $set: { avatar: req.fileurl }}).exec()
+    res.send({username: Profile.username, avatar: req.fileurl})
 }
 
 
@@ -86,7 +84,7 @@ module.exports = app => {
      app.get('/zipcode/:user?', getZipcode)
      app.put('/zipcode', putZipcode)
      app.get('/avatars/:user?', getAvatars)
-     app.put('/avatar', putAvatars)
+     app.put('/avatar', uploadImage('avatar'), uploadAvatar)
      app.get('/dob', getDOB)
 }
 

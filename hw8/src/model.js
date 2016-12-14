@@ -6,7 +6,8 @@ require('./db.js')
 var userSchema = new mongoose.Schema({
     username: String,
 	salt: String,
-	hash: String
+	hash: String,
+    facebookId: String
 })
 
 var profileSchema = new mongoose.Schema({
